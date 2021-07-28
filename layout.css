@@ -48,35 +48,28 @@ button {
 
 #tasks {
   background-color: #ffffff;
-  padding: 30px 20px;
+  padding: 15px 10px;
   margin: auto;
   margin-top: 30px;
   border-radius: 10px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   width: 70%;
   position: relative;
+  height: 380px;
+  overflow: auto;
 }
 
-.task {
-  background-color: #ffffff;
-  height: 50px;
-  padding: 5px 10px;
-  margin-top: 10px;
+li {
+  list-style: none;
+  padding: 10px 5px;
+  background-color: #fff;
+  margin: 12px 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.16);
+  border-radius: 3px;
+  transition: 0.4s;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 2px solid #d1d3d4;
-  cursor: pointer;
-}
-
-.task span {
-  font-family: "Roboto", sans-serif;
-  font-size: 15px;
-  font-weight: 400;
-}
-
-.task > .small {
-  font-size: 12px;
 }
 
 button:hover {
@@ -85,4 +78,5 @@ button:hover {
 
 .checked {
   text-decoration: line-through;
+  background-color: #e0e0e0;
 }

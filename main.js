@@ -1,46 +1,30 @@
+
 const input = document.querySelector("#add");
+const  btn = document.querySelector("#btn");
 const timer = document.querySelector("#timer");
-const btn = document.querySelector("#btn");
-const li = document.querySelector('#tasks');
+var list = document.querySelector("#list");
 
-
-
-
+// this function will allow us to add elements when we click the button
 btn.onclick = function(){
     
     var txt = input.value;
-    var time = timer.value;
+        var time = timer.value;
 
-
-
-    if(txt == '' || time == ''){
+    if(txt =='' || time == ''){
         alert('you must write something');
     }else{
-        li.innerHTML += `
-        <div class="task">
-            <span>  ${txt} </span>
-           <p class="timeout">Timeout:<span class="small">${mm} </span></p>
-            <button class="delete"><i class="fas fa-trash-alt"></i></button>
-        </div>`;
+        li = document.createElement('li');
+        li.innerHTML = txt += `
+            <p class="timeout">Timeout:<span class="small"> ${mm} </span></p>
+            <button onclick="myFunc(this)"><i class="fas fa-trash-alt"></i></button>
+        `;
+        list.insertBefore(li,list.childNodes[0]);
         input.value = '';
         timer.value = '';
     }
+    
 
-    var current_tasks = document.querySelectorAll(".delete");
-    for(var i=0; i<current_tasks.length; i++){
-        current_tasks[i].onclick = function(){
-            this.parentNode.remove();
-        }
-    }
-
-    var tasks = document.querySelectorAll(".task");
-    for(var i=0; i<tasks.length; i++){
-        tasks[i].onclick = function(){
-            this.classList.toggle('checked');
-            endCount()
-        }
-    }
-
+        // time out code
         let timeSecond = time * 60;
 
         const timeH = document.querySelector(".small");
@@ -69,4 +53,21 @@ btn.onclick = function(){
         function endCount() {
         timeout.innerHTML = "Time out";
         }
+
+        //this function will allow us to check the clicked elements
+
+        list.onclick = function(ev){
+            if(ev.target.tagName == 'LI'){
+                ev.target.classList.toggle('checked');
+                endCount();
+            }
+        };
 };
+
+//this function will delete
+
+function myFunc(elem) {
+  let li = elem.parentNode;
+  li.parentNode.removeChild(li);
+}
+
