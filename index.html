@@ -1,42 +1,35 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My to-do list</title>
+    <title>To DO List</title>
     <link rel="stylesheet" href="layout.css">
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+        integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
 </head>
-
 <body>
+    
+        <div class="container">
+            <h1>To-do list</h1>
+        
+            <div class="add-elements">
+                <input id="add" type="text" placeholder="Add an element">
+                <input id="timer" type="text" placeholder="enter minutes">
+                <button id="btn">Add</button>
+            </div>
 
-    <div class="box">
+            <div id="tasks">
 
-        <h1>My to-do list</h1>
 
-        <p><i>Double-click an item to mark it complete.</i></p>
+            </div>
 
-        <div class="add_box">
-            <input type="text" id="text" placeholder="please add task">
-            <button class="btn" id="add">Add</button>
         </div>
 
 
-        <ol class="ol" id="ol">
-            <li>My</li>
-            <li>to-do</li>
-            <li>list</li>
-        </ol>
-
-        <div class="box2">
-            <button class="btn2" id="clear">Clear Completed</button>
-            <button class="btn2" id="empty">Empty list</button>
-        </div>
-
-    </div>
 
     <script src="main.js"></script>
-
 </body>
-
 </html>
