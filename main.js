@@ -43,7 +43,6 @@ function showTasks(){
     });
     todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
     inputBox.value = ""; //once task added leave the input field blank
-    timer.value = '';
 
 }
 
