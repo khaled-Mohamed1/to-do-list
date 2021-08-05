@@ -43,7 +43,10 @@ button {
   border: none;
   border-radius: 4px;
   color: #fafafa;
-  transition: 0.4s;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  pointer-events: none;
+  cursor: pointer;
 }
 
 #tasks {
@@ -76,7 +79,19 @@ button:hover {
   background-color: #1565c0;
 }
 
+.inputField button.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 .checked {
   text-decoration: line-through;
   background-color: #e0e0e0;
+}
+
+.delete {
+  background-color: #00b0ff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 1;
 }

@@ -1,73 +1,65 @@
-
-const input = document.querySelector("#add");
-const  btn = document.querySelector("#btn");
+// getting all required elements
+const inputBox = document.querySelector(".inputField input");
+const addBtn = document.querySelector(".inputField button");
 const timer = document.querySelector("#timer");
-var list = document.querySelector("#list");
+const todoList = document.querySelector(".todoList");
 
-// this function will allow us to add elements when we click the button
-btn.onclick = function(){
-    
-    var txt = input.value;
-        var time = timer.value;
-
-    if(txt =='' || time == ''){
-        alert('you must write something');
+inputBox.onkeyup = ()=>{
+    let userEnteredValue = inputBox.value; //getting user entered value
+    if(userEnteredValue.trim() != 0){ //if the user value isn't only spaces
+        addBtn.classList.add("active"); //active the add button
     }else{
-        li = document.createElement('li');
-        li.innerHTML = txt += `
-            <p class="timeout">Timeout:<span class="small"> ${mm} </span></p>
-            <button onclick="myFunc(this)"><i class="fas fa-trash-alt"></i></button>
-        `;
-        list.insertBefore(li,list.childNodes[0]);
-        input.value = '';
-        timer.value = '';
+        addBtn.classList.remove("active"); //unactive the add button
     }
-    
-
-        // time out code
-        let timeSecond = time * 60;
-
-        const timeH = document.querySelector(".small");
-
-        var mm = displayTime(timeSecond);
-
-        const countDown = setInterval(() => {
-        timeSecond--;
-        displayTime(timeSecond);
-        if (timeSecond == 0 || timeSecond < 1) {
-            endCount();
-            clearInterval(countDown);
-        }
-        }, 1000);
-
-        function displayTime(second) {
-        const min = Math.floor(second / 60);
-        const sec = Math.floor(second % 60);
-        timeH.innerHTML = `
-        ${min < 10 ? "0" : ""}${min}:${sec < 10 ? "0" : ""}${sec}
-        `;
-        }
-
-        const timeout = document.querySelector(".timeout");
-
-        function endCount() {
-        timeout.innerHTML = "Time out";
-        }
-
-        //this function will allow us to check the clicked elements
-
-        list.onclick = function(ev){
-            if(ev.target.tagName == 'LI'){
-                ev.target.classList.toggle('checked');
-                endCount();
-            }
-        };
-};
-
-//this function will delete
-
-function myFunc(elem) {
-  let li = elem.parentNode;
-  li.parentNode.removeChild(li);
 }
+
+    showTasks();
+
+addBtn.onclick = ()=>{ //when user click on plus icon button
+    let userEnteredValue = inputBox.value; //getting input field value
+    let getLocalStorageData = localStorage.getItem("New Todo"); //getting localstorage
+    if(getLocalStorageData == null){ //if localstorage has no data
+        listArray = []; //create a blank array
+    }else{
+        listArray = JSON.parse(getLocalStorageData);  //transforming json string into a js object
+    }
+    listArray.push(userEnteredValue); //pushing or adding new value in array
+    localStorage.setItem("New Todo", JSON.stringify(listArray)); //transforming js object into a json string
+    showTasks(); //calling showTask function
+    addBtn.classList.remove("active"); //unactive the add button once the task added
+}
+
+function showTasks(){
+    let getLocalStorageData = localStorage.getItem("New Todo");
+    if(getLocalStorageData == null){
+        listArray = [];
+    }else{
+        listArray = JSON.parse(getLocalStorageData); 
+    }
+    let newLiTag = "";
+    listArray.forEach((element, index) => {
+        newLiTag += `<li>${element}
+        <span class="icon" onclick="deleteTask(${index})"><button class="delete"><i class="fas fa-trash"></i></button></span>
+        </li>`;
+    });
+    todoList.innerHTML = newLiTag; //adding new li tag inside ul tag
+    inputBox.value = ""; //once task added leave the input field blank
+    timer.value = '';
+
+}
+
+// delete task function
+function deleteTask(index){
+    let getLocalStorageData = localStorage.getItem("New Todo");
+    listArray = JSON.parse(getLocalStorageData);
+    listArray.splice(index, 1); //delete or remove the li
+    localStorage.setItem("New Todo", JSON.stringify(listArray));
+    showTasks(); //call the showTasks function
+}
+
+    todoList.onclick = function(ev){
+        if(ev.target.tagName == 'LI'){
+            ev.target.classList.toggle('checked');
+        }
+    };
 
