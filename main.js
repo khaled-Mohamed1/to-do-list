@@ -1,7 +1,6 @@
 // getting all required elements
 const inputBox = document.querySelector(".inputField input");
 const addBtn = document.querySelector(".inputField button");
-const timer = document.querySelector("#timer");
 const todoList = document.querySelector(".todoList");
 
 inputBox.onkeyup = ()=>{
